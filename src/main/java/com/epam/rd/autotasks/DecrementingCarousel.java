@@ -1,15 +1,34 @@
 package com.epam.rd.autotasks;
 
 public class DecrementingCarousel {
-    public DecrementingCarousel(int capacity) {
+    public int capacity;
+    public int maxIndex = 0;
+    public int[] array;
+    protected boolean run = false;
 
+    public DecrementingCarousel(int capacity) {
+        this.capacity = capacity;
+        array = new int[capacity];
     }
 
     public boolean addElement(int element){
-        throw new UnsupportedOperationException();
+        if(element <= 0 || maxIndex == capacity) {
+            return false;
+        }
+        if (!run) {
+            this.array[this.maxIndex] = element;
+            this.maxIndex++;
+        }
+        return !run;
     }
 
     public CarouselRun run(){
-       throw new UnsupportedOperationException();
+        if (run) {
+            return null;
+        } else {
+            CarouselRun cr = new CarouselRun(this, -1);
+            run = true;
+            return cr;
+        }
     }
 }
